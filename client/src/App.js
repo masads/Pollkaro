@@ -4,10 +4,8 @@ import { Popover, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { Link } from "react-router-dom";
 const navigation = [
-  { name: 'Product', href: '#' },
-  { name: 'Features', href: '#' },
-  { name: 'Marketplace', href: '#' },
-  { name: 'Company', href: '#' },
+  { name: 'Home' },
+  { name: 'Poll' }
 ]
 
 export default function Example() {
@@ -51,9 +49,10 @@ export default function Example() {
                       {item.name}
                     </a>
                   ))}
-                  <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                    Log in
-                  </a>
+                
+                  <Link  className="font-medium text-indigo-600 hover:text-indigo-500"
+                    to='login'>Log in
+                  </Link> 
                 </div>
               </nav>
             </div>
@@ -98,14 +97,9 @@ export default function Example() {
                       </a>
                     ))}
                   </div>
-                  <a
-                    href="login"
-                    className="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100"
-                  >
-                    Log in
-                  </a>
-                  <Link 
-                    to='link'>
+
+                  <Link  className="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100"
+                    to='login'>Log in
                   </Link> 
                 </div>
               </Popover.Panel>
