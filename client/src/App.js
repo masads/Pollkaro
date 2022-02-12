@@ -1,14 +1,16 @@
-import { Link } from "react-router-dom";
+/* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
-
+import { Link } from "react-router-dom";
 const navigation = [
-  { name: 'Home', href: '#' },
-  { name: 'Polls', href: '#' },
+  { name: 'Product', href: '#' },
+  { name: 'Features', href: '#' },
+  { name: 'Marketplace', href: '#' },
+  { name: 'Company', href: '#' },
 ]
 
-export default function App() {
+export default function Example() {
   return (
     <div className="relative bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
@@ -96,15 +98,15 @@ export default function App() {
                       </a>
                     ))}
                   </div>
-                 
-                  <Link 
-                    to='login' >
                   <a
+                    href="login"
                     className="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100"
                   >
                     Log in
                   </a>
-                    </Link> 
+                  <Link 
+                    to='link'>
+                  </Link> 
                 </div>
               </Popover.Panel>
             </Transition>
