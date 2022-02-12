@@ -16,7 +16,7 @@ ReactDOM.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        
+        <Route path="login" element={<Login />} />
         <Route path="dashboard" element={<Dashboard active="true"/>} />
         <Route path="mypoll" element={<MyPoll />} />
         <Route path="createpoll" element={<CreatePoll />} />
