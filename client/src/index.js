@@ -12,11 +12,13 @@ import CreatePoll from './pages/CreatePoll';
 import Profile from './pages/profile';
 import MyPoll from './pages/MyPolls';
 import Login from './pages/login'
+import Register from './pages/register'
 ReactDOM.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
         <Route path="dashboard" element={<Dashboard active="true"/>} />
         <Route path="mypoll" element={<MyPoll />} />
         <Route path="createpoll" element={<CreatePoll />} />

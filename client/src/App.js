@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
+/* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
-
+import { Link } from "react-router-dom";
 const navigation = [
-  { name: 'Home', href: '#' },
-  { name: 'Polls', href: '#' },
+  { name: 'Home' ,href:"#" },
+  { name: 'Poll' ,href:"#" }
 ]
 
 export default function App() {
@@ -49,9 +49,13 @@ export default function App() {
                       {item.name}
                     </a>
                   ))}
-                  <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                    Log in
-                  </a>
+                
+                  <Link  className="font-medium text-indigo-600 hover:text-indigo-500"
+                    to='login'>Log in
+                  </Link> 
+                  <Link  className="font-medium text-indigo-600 hover:text-indigo-500"
+                    to='register'>Register
+                  </Link>
                 </div>
               </nav>
             </div>
@@ -96,15 +100,13 @@ export default function App() {
                       </a>
                     ))}
                   </div>
-                 
-                  <Link 
-                    to='login' >
-                  <a
-                    className="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100"
-                  >
-                    Log in
-                  </a>
-                    </Link> 
+
+                  <Link  className="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100"
+                    to='login'>Log in
+                  </Link> 
+                  <Link  className="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100"
+                    to='register'>Register
+                  </Link> 
                 </div>
               </Popover.Panel>
             </Transition>
