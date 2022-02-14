@@ -1,7 +1,32 @@
-import React from 'react'
+import * as React from 'react'
 import { LockClosedIcon } from '@heroicons/react/solid'
-
-function login() {
+import axios from "axios";
+import API_URL from "../components/API_URL";
+const client = axios.create({
+  baseURL: API_URL,
+});
+function Login() {
+  const [Email,setEmail]=React.useState('');
+  const [Password,setPassword]=React.useState('');
+  function LoginUser()
+  {
+    let data={
+      email:Email,
+      password:Password,
+    }
+    client
+    .post("/login", data )
+    .then(
+      (response) => {
+        console.log("image add sucessfully");
+        console.log(response["request"]["_response"]);
+      },
+      (response) => {
+        console.log("image add not sucessfully");
+        console.log(response["request"]["_response"]);
+      }
+    );
+  }
   return (
     <>
      <div className="mt-40 min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -15,7 +40,7 @@ function login() {
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
 
           </div>
-          <form className="mt-8 space-y-6" action="#" method="POST">
+
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
@@ -27,9 +52,11 @@ function login() {
                   name="email"
                   type="email"
                   autoComplete="email"
+                  value={Email}
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Email address"
+                  onChange={(text)=>{setEmail(text.target.value)}}
                 />
               </div>
               <div>
@@ -40,7 +67,9 @@ function login() {
                   id="password"
                   name="password"
                   type="password"
+                  value={Password}
                   autoComplete="current-password"
+                  onChange={(text)=>{setPassword(text.target.value)}}
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Password"
@@ -71,6 +100,7 @@ function login() {
             <div>
               <button
                 type="submit"
+                onClick={LoginUser()}
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
@@ -79,11 +109,10 @@ function login() {
                 Sign in
               </button>
             </div>
-          </form>
         </div>
       </div>
     </>
   )
 }
 
-export default login
+export default Login
