@@ -2,7 +2,6 @@ import * as React from 'react'
 import {Box,Stepper,Step,StepLabel,Button,Typography,TextField} from '@mui/material';
 import { DatePicker,LocalizationProvider } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import { BeakerIcon, CursorClickIcon } from '@heroicons/react/solid'
 import axios from "axios";
 import API_URL from "../components/API_URL";
 const steps = ['Personal Information', 'Credential', 'CNIC or Passport Picture'];
