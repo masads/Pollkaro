@@ -20,7 +20,6 @@ function Register() {
     const [profileImage,setprofileImage]=React.useState('https://www.freeiconspng.com/uploads/account-profile-user-icon--icon-search-engine-10.png');
     const [frontImage,setfrontImage]=React.useState('');
     const [backImage,setbackImage]=React.useState('');
-
     const [Alert, setAlert] = React.useState(null);
     const [count,setCount]=React.useState(0)
 
