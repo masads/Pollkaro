@@ -23,7 +23,7 @@ function Register() {
     const [Alert, setAlert] = React.useState(null);
     const [count,setCount]=React.useState(0)
 
-    const [profileImageData,setprofileImageData]=React.useState('');
+    const [profileImageData,setprofileImageData]=React.useState(null);
     const [frontImageData,setfrontImageData]=React.useState('');
     const [backImageData,setbackImageData]=React.useState('');
     
@@ -33,56 +33,37 @@ function Register() {
 
           const reader = new FileReader();
           reader.addEventListener("load", () => {
-            if(id==1){setprofileImage(reader.result);setprofileImageData(e.target.files[0]["name"]);}
-            else if(id==2){setfrontImage(reader.result);setfrontImageData(e.target.files[0]["name"]);}
-            else {setbackImage(reader.result);setbackImageData(e.target.files[0]["name"]);}
-
+            if(id==1){setprofileImage(reader.result);setprofileImageData(e.target.files[0]);}
+            else if(id==2){setfrontImage(reader.result);setfrontImageData(e.target.files[0]);}
+            else {setbackImage(reader.result);setbackImageData(e.target.files[0]);}
           });
           reader.readAsDataURL(e.target.files[0]);
         }
       };
       async function RegisterUser() {
 
-          console.log(count)
-          //image issue
-          if(fName.length!=0 && lName.length!=0 && bDate.length!=0 && Email.length!=0 && Password.length!=0 && cnic.length!=0 ){
-              let pimageName = `${Date.now()}_${profileImageData}}`;
-              let fimageName = `${Date.now()}_${frontImageData}}`;
-              let bimageName = `${Date.now()}_${backImageData}`;
-              const iData = new FormData();
-              console.log(profileImage)
-              iData.append("images", {
-                name: pimageName,
-                type: "image/jpeg",
-                uri: JSON.stringify(profileImage),
-              });
-              iData.append("images", {
-                name: fimageName,
-                type: "image/jpeg",
-                uri: frontImage,
-              });
-              iData.append("images", {
-                name: bimageName,
-                type: "image/jpeg",
-                uri: backImage,
-              });
-              console.log(iData)
-              client
-              .post("/images", iData, {
-                headers: {
-                  "Content-Type": "multipart/form-data",
-                },
-              })
-              .then(
-                (response) => {
-                  console.log("image add sucessfully");
-                  console.log(response);
-                },
-                (response) => {
-                  console.log("image add not sucessfully");
-                  console.log(response);
-                }
-              );
+          if(fName.length!=0 && lName.length!=0 && bDate.length!=0 && Email.length!=0 && Password.length!=0 && cnic.length!=0 )
+          {
+              let arr=[profileImageData,frontImageData,backImageData]
+              for(let i=0;i<3;i++)
+              {
+                const iData = new FormData();
+                iData.append("image", arr[i],arr[i]['name']);
+                client
+                .post("/images", iData, {
+                  headers: {
+                    "Content-Type": "multipart/form-data",
+                  },
+                })
+                .then(
+                  (response) => {
+                    console.log("image add sucessfully");
+                  },
+                  (response) => {
+                    console.log("image add not sucessfully");
+                  }
+                );
+              }
               let data={
                 fname:fName,
                 lname:lName,
@@ -96,11 +77,9 @@ function Register() {
               .then(
                 (response) => {
                   console.log("image add sucessfully");
-                  console.log(response["request"]["_response"]);
                 },
                 (response) => {
                   console.log("image add not sucessfully");
-                  console.log(response["request"]["_response"]);
                 }
               );
               setActiveStep(activeStep+1)
@@ -190,7 +169,7 @@ function Register() {
                                     className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                                 >
                                     <span>Upload a file</span>
-                                    <input id="file-upload" name="file-upload" type="file" className="sr-only" onChange={(e)=>{onChangePicture(e,1)}}/>
+                                    <input id="file-upload" name="file-upload" type="file" accept='.png,.jpg' className="sr-only" onChange={(e)=>{onChangePicture(e,1)}}/>
                                 </label>)}
                                 
                             </div>
@@ -231,23 +210,8 @@ function Register() {
                           }} id="demo-helper-text-misaligned-no-helper" label="Last Name" defaultValue={lName} value={lName} onChange={(text)=>{setlName(text.target.value)}}/>
                             <LocalizationProvider dateAdapter={AdapterDateFns} >
                                 
-                                {/* <MobileDatePicker
-                                
-                                label="Date of Birdth"
-                                inputFormat="MM/dd/yyyy"
-                                value={bDate}
-                                onChange={(text)=>{setbDate(text)}}
-                                renderInput={(params) => <TextField {...params} />}
-                                /> */}
                                 <DatePicker
-                                  sx={{
-                                    '& MuiButtonBase-root':
-                                    {
-                                      '& MuiPickersDay-root ':{
-                                        backgroundColor: '#4f46e5',
-                                      }
-                                    }
-                                  }}
+
                                   label="Date of Birdth"
                                   value={bDate}
                                   onChange={(text)=>{setbDate(text)}}
@@ -291,7 +255,7 @@ function Register() {
                                 color: '#4f46e5',
                               }
                           
-                          }} id="demo-helper-text-misaligned-no-helper" label="Email" defaultValue={Email} value={Email} onChange={(text)=>{setEmail(text.target.value)}}/>
+                          }}  label="Email" defaultValue={Email} value={Email} onChange={(text)=>{setEmail(text.target.value)}}/>
                 <TextField type="password" 
                   sx={{paddingBottom:'1rem',
                   '& .MuiOutlinedInput-root': {
@@ -358,7 +322,7 @@ function Register() {
                         className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                       >
                         <span>Upload a file</span>
-                        <input id="file-upload" name="file-upload" type="file" className="sr-only" onChange={(e)=>{onChangePicture(e,2)}}/>
+                        <input id="file-upload" name="file-upload" type="file" accept='.png,.jpg' className="sr-only" onChange={(e)=>{onChangePicture(e,2)}}/>
                       </label>
                       <p className="pl-1">or drag and drop</p>
                     </div>
@@ -389,7 +353,7 @@ function Register() {
                         className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                       >
                         <span>Upload a file</span>
-                        <input id="file-upload" name="file-upload" type="file" className="sr-only" onChange={(e)=>{onChangePicture(e,3)}}/>
+                        <input id="file-upload" name="file-upload" type="file" accept='.png,.jpg' className="sr-only" onChange={(e)=>{onChangePicture(e,3)}}/>
                       </label>
                       <p className="pl-1">or drag and drop</p>
                     </div>
