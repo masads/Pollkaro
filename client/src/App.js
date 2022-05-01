@@ -11,6 +11,7 @@ const navigation = [
 export default function App() {
   return (
     <div className="relative bg-white overflow-hidden">
+      
       <div className="max-w-7xl mx-auto">
         <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
           <svg
@@ -31,8 +32,8 @@ export default function App() {
                     <a href="#">
                       <span className="sr-only">Workflow</span>
                       <img
-                        className="h-8 w-auto sm:h-10"
-                        src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                        className="h-10 w-auto sm:h-12"
+                        src="logo.png"
                       />
                     </a>
                     <div className="-mr-2 flex items-center md:hidden">
@@ -78,7 +79,7 @@ export default function App() {
                     <div>
                       <img
                         className="h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                        src="logo.png"
                         alt=""
                       />
                     </div>
@@ -138,6 +139,7 @@ export default function App() {
                   >
                     Live demo
                   </a>
+                    
                 </div>
               </div>
             </div>
@@ -151,6 +153,7 @@ export default function App() {
           alt=""
         />
       </div>
+      
     </div>
   )
 }
